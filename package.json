@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"node index.js" 
- },
+    "start": "nodemon index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AuctionKingdom/BackendAuction.git"
@@ -19,6 +19,7 @@
   "homepage": "https://github.com/AuctionKingdom/BackendAuction#readme",
   "dependencies": {
     "express": "4.17.1",
+    "nodemon": "^2.0.3",
     "socket.io": "2.3.0"
   }
 }
