@@ -1,16 +1,12 @@
 'use strict';
 
-const express = require('express');
+let express = require('express');
+let app = express();
+let server = app.listen(8080);
+let io = require('socket.io')(server);
 
-const PORT = 8080;
-const HOST = '0.0.0.0';
+require('./routes/connection.js')(io);
 
-const app = express();
-app.get('/',(req,res)=>{
-	res.send('Hello World');
-});
+console.log(`Running on http://localhost:8080`);
 
-app.listen(PORT,HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
-
-
+module.exports = app;
