@@ -2,11 +2,14 @@
 
 let express = require('express');
 let app = express();
-let server = app.listen(8080);
+const port = process.env.PORT || 8080;
+let server = require('http').createServer(app);
 let io = require('socket.io')(server);
 
-require('./routes/connection.js')(io);
+require('./services/connection.js')(io);
 
 console.log(`Running on http://localhost:8080`);
+
+server.listen(port, () => console.log(`Listening on port ${port}`));
 
 module.exports = app;
