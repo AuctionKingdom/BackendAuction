@@ -9,11 +9,30 @@ dotenv.config()
 const bodyparser = require('body-parser');
 const cookieparser = require('cookie-parser')
 const expressvalidator = require('express-validator');
-const fs = require('fs')
 const cors = require('cors')
+var redis = require('redis')
 
 const PORT = 8080;
 const HOST = '127.0.0.1';
+
+// redis Database Connection
+
+const client = redis.createClient({
+  host : process.env.redishost,
+  port : process.env.redisport,
+  password : process.env.redispass
+}).on('error', err => console.error("Error while creating connection to redis database", err));;
+
+
+client.on('connect', function() {
+  console.log("Connected to redis Database")
+})
+
+
+client.on('error', function() {
+  console.log("Error connecting to redis Database")
+})
+
 
 //db
 

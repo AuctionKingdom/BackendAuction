@@ -1,7 +1,4 @@
 const User = require('../models/user');
-const formidable = require('formidable')
-const fs = require('fs')
-const _ = require('lodash')
 
 exports.userById = (req, res, next, id) => {
     User.findById(id)
