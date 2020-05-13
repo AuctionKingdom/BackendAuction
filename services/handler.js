@@ -1,57 +1,30 @@
-var rooms = []
-
-var roomMap = new Map();
-
+const { redisClient } from '../index.js';
+const { roomCount } from './roomManager.js';
+let num_of_users = 3;
 var Player = {
   player:'HarishK',
   currentBid:1,
   increment:0.5
 }
 
-//Handler for CreateRoom
-createRoom = async(io, roomName, socket)=>{
+/**
 
-      if(rooms.includes(roomName)){
+    if roomCount < 8:
+        addUser to the room channel
+    else
+        room is full and cannot be added
+*/
+addUser = async(io, roomId, socket)=>{
 
-          console.log(`Existing Room ${roomName} Called`);
-
-          socket.emit('Error','Couldnt create the required Room as it already exists');
-
-      }else{
-
-          let newClient = [socket.id];
-
-          console.log("Created");
-
-          rooms.push(roomName);
-
-          roomMap.set(roomName,newClient);
-
-          socket.join(roomName);
-
-          socket.emit('success',`${roomName}`);
-      }
-
-
-}
-
-//Handler for JoinRoom
-joinRoom = async(io, roomName, socket)=>{
-
-    //Identifies whether the room exist
-    if(rooms.includes(roomName)){
-
-        //Gets the client List for the particular room
-        let clientList = roomMap.get(roomName);
-        clientList.push(socket.id);
-
-        //Joining the socket to the broadcast of the room
-        socket.join(roomName);
-
-        socket.emit('success',`${roomName}`);
-
+    if(roomCount.get(roomId) < num_of_users){
+        socket.join(roomId)
+        io.to(roomId).emit('success','redirect');
+        return true;
     }
+
+    return false;
 }
+
 
 startMatch = async(io,roomName, socket)=>{
 
