@@ -1,5 +1,5 @@
-const { redisClient } from '../index.js';
-const { roomCount } from './roomManager.js';
+const redisClient = require('../redisConnection.js');
+const { roomCount } = require('./roomManager.js');
 let num_of_users = 3;
 var Player = {
   player:'HarishK',
@@ -18,10 +18,11 @@ addUser = async(io, roomId, socket)=>{
 
     if(roomCount.get(roomId) < num_of_users){
         socket.join(roomId)
-        io.to(roomId).emit('success','redirect');
+        io.to(roomId).emit('success',`${roomId}`);
         return true;
     }
 
+    socket.emit('failure','The Room is Full');
     return false;
 }
 
@@ -41,7 +42,7 @@ newBid = async(io,roomName,bid,socket)=>{
 }
 
 module.exports = {
-  joinRoom,
+  addUser,
   createRoom,
   startMatch,
   newBid

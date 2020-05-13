@@ -1,12 +1,12 @@
-const { redisClient } = require('../index.js');
+const redisClient = require('../redisConnection.js');
 const crypto = require("crypto");
 var roomCount = new Map();
 
 createRoom = (io, socket, addUser) =>{
 
     //Created a random RoomName and attached the client name
-    const id = crypto.randomBytes(16).toString("hex");
-    redisClient.hmset(id,socket.id);
+    const id = crypto.randomBytes(5).toString("hex");
+    redisClient.hmset(id,socket.id,"dummy");
     roomCount.set(id,1);
 
     return [addUser(io,id,socket),id];
@@ -21,9 +21,9 @@ joinRoom = (io, socket, roomid, addUser) =>{
 
         if(addUser(io,roomid,socket)){
 
-              redisClient.hmset(roomid, socket.id);
-              let count = roomCount.get(id);
-              roomCount.set(id,count+1);
+              redisClient.hmset(roomid,socket.id,"dummy");
+              let count = roomCount.get(roomid);
+              roomCount.set(roomid,count+1);
               return true;
         }
 
@@ -31,8 +31,24 @@ joinRoom = (io, socket, roomid, addUser) =>{
     return false;
 }
 
+/**
+
+  Available Rooms
+
+*/
+
+availableRoom = ()=>{
+
+  const obj = {};
+  for (const key of roomCount.keys()) {
+    obj[key] = roomCount.get(key);
+  }
+  return obj;
+}
+
 module.exports = {
   createRoom,
   joinRoom,
+  availableRoom,
   roomCount
 }
