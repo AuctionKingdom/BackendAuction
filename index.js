@@ -5,7 +5,39 @@ let app = express();
 const port = process.env.PORT || 8080;
 let io = require('socket.io')(app.listen(port,()=>console.log(`Listening on port ${port}`)));
 const redis = require('./redisConnection.js');
+const morgan = require('morgan');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+dotenv.config()
+const bodyparser = require('body-parser');
+const cookieparser = require('cookie-parser')
+const expressvalidator = require('express-validator');
+const cors = require('cors')
 
 require('./services/connection.js')(io);
+
+
+mongoose.connect(process.env.uri,{useNewUrlParser: true, useUnifiedTopology: true})
+.then(() => console.log('DB connected'))
+mongoose.connection.on('error',err => {
+  console.log(`DB connection error: ${err.message}`);
+});
+const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/user");
+app.get('/',(req,res)=>{
+	res.send('Auction Kingdom');
+});
+app.use(morgan("dev"));
+app.use(bodyparser.json())
+app.use(expressvalidator())
+app.use(cookieparser())
+app.use(cors());
+app.use("/",authRoutes);
+app.use("/",userRoutes);
+app.use(function (err,req,res,next){
+  if(err.name === "UnauthorizedError") {
+    res.status(401).json({error: "Unauthorized User!"});
+});
+}
 
 module.exports =  app;
