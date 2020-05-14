@@ -45,6 +45,9 @@ exports.signin = (req,res) => {
         }
 
         const token = jwt.sign({_id: user._id}, process.env.jwt_secret);
+        //const decode = jwt.verify(token,process.env.jwt_secret)
+        //console.log(decode._id)
+        //iat tells the time of token creation
 
         res.cookie("t", token, {expire: new Date() + 9999});
 

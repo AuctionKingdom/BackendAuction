@@ -16,7 +16,7 @@ const PORT = 8080;
 const HOST = '127.0.0.1';
 
 // redis Database Connection
-
+/*
 const client = redis.createClient({
   host : process.env.redishost,
   port : process.env.redisport,
@@ -33,7 +33,7 @@ client.on('error', function() {
   console.log("Error connecting to redis Database")
 })
 
-
+*/
 //db
 
 mongoose.connect(process.env.uri,{useNewUrlParser: true, useUnifiedTopology: true})
