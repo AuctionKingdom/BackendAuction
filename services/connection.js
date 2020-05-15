@@ -9,10 +9,6 @@ connection = (io)=>{
 					socket.emit('Connected',"True");
 			    console.log("Got connection..",socket.id);
 
-					setInterval(()=>{
-							socket.emit('room',availableRoom());
-					},1500);
-
 					/**
 						Create room doesnt expect the user to provide
 						any roomName, while joining expects
