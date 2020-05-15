@@ -1,7 +1,7 @@
-const { createRoom, joinRoom, availableRoom}  = require('./roomManager.js');
+const { createRoom, joinRoom, availablePublicRoom}  = require('./roomManager.js');
 const { addUser } = require('./handler.js');
 const redisClient = require('../redisConnection.js');
-
+const jwt = require('jsonwebtoken')
 connection = (io)=>{
 
 		io.on('connection',(socket)=>{
@@ -19,15 +19,39 @@ connection = (io)=>{
 
 							let results = createRoom(io,socket,addUser);
 
-							if(results[0])
-									redisClient.hgetall(results[1],(err,object)=>{
-											setTimeout(()=>{
-												console.log(object);
-												io.to(results[1]).emit('people',object)
-											},500)
-							})
+							if(results[0]){
+										redisClient.hgetall(results[1],(err,object)=>{
+												setTimeout(()=>{
+													console.log(object);
+													io.to(results[1]).emit('people',object)
+												},500)
+									 })
+
+							}
+
 					})
 
+
+					socket.on('PlayOnline',data=>{
+
+							let jwtToken = JSON.parse(data.token);
+						  const decode = jwt.verify(jwtToken.token,process.env.jwt_secret)
+							if(decode._id === jwtToken.user._id)
+							{
+									let result = availablePublicRoom(io,socket,addUser,jwtToken.user.email)
+									if(result[0]){
+											redisClient.hgetall(result[1],(err,object)=>{
+												 setTimeout(()=>{
+													 	console.log(object);
+														io.to(result[1]).emit('people',object)
+												 },500)
+											})
+									}
+
+							}else{
+									socket.emit('failure',"Invalid JWT Token")
+							}
+					})
 					/**
 						Joining the clicked roomId
 

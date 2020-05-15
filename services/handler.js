@@ -14,10 +14,11 @@ var Player = {
     else
         room is full and cannot be added
 */
-addUser = async(io, roomId, socket)=>{
+addUser = (io, roomId, socket)=>{
 
     if(roomCount.get(roomId) < num_of_users){
         socket.join(roomId)
+        console.log(roomId);
         io.to(roomId).emit('success',`${roomId}`);
         return true;
     }
@@ -27,12 +28,12 @@ addUser = async(io, roomId, socket)=>{
 }
 
 
-startMatch = async(io,roomName, socket)=>{
+startMatch = (io,roomName, socket)=>{
 
     io.to(roomName).emit('newPlayer',Player)
 }
 
-newBid = async(io,roomName,bid,socket)=>{
+newBid = (io,roomName,bid,socket)=>{
 
     console.log(`Current Bid for ${Player.player} by ${socket.id} at ${bid}`);
     Player.currentBid = bid;
