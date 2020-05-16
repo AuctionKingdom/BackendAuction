@@ -6,6 +6,22 @@ const _ = require('lodash')
 const {sendEmail} = require('../helpers')
 
 
+exports.checkJwt = async(req,res)=>{
+
+    try{
+        const { token, user} = req.body;
+        const decode = jwt.verify(token,process.env.jwt_secret)
+        if(decode._id === user._id){
+            return res.status(200).json({message:'success'})
+        }else{
+            return res.status(200).json({error:'JWT mismatch'})
+        }
+    }catch(error){
+        return res.status(200).json({error:'JWT Error'});
+    }
+
+}
+
 exports.signup = async (req,res) => {
     try{
         const userExists = await User.findOne({ email: req.body.email })
