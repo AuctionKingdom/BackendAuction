@@ -5,11 +5,6 @@ let app = express();
 const port = process.env.PORT || 8080;
 
 let io = require('socket.io')(app.listen(port,()=>console.log(`Listening on port ${port}`)));
-<<<<<<< HEAD
-=======
-io.origins('*:*');
-
->>>>>>> parent of 498e988... Heroku cors
 
 const redis = require('./redisConnection.js');
 

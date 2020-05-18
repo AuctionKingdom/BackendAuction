@@ -14,10 +14,10 @@ exports.checkJwt = async(req,res)=>{
         if(decode._id === user._id){
             return res.status(200).json({message:'success'})
         }else{
-            return res.status(200).json({error:'JWT mismatch'})
+            return res.status(404).json({error:'JWT mismatch'})
         }
     }catch(error){
-        return res.status(200).json({error:'JWT Error'});
+        return res.status(404).json({error:'JWT Error'});
     }
 
 }
