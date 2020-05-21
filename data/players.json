@@ -1,0 +1,1150 @@
+[
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/11595.jpg",
+    "player": "Ravisrinivasan Sai Kishore",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/6258.jpg",
+    "player": "Josh Hazlewood",
+    "type": "Bowler",
+    "nationality": "Australia",
+    "base": 200.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/466.jpg",
+    "player": "Piyush Chawla",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 100.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/10420.jpg",
+    "player": "Sam Curran",
+    "type": "Bowling Allrounder",
+    "nationality": "England",
+    "base": 100.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/8683.jpg",
+    "player": "Shardul Thakur",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/13483.jpg",
+    "player": "KM Asif",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/7836.jpg",
+    "player": "Deepak Chahar",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/6667.jpg",
+    "player": "Imran Tahir",
+    "type": "Bowler",
+    "nationality": "South Africa",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/1844.jpg",
+    "player": "Karn Sharma",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/75.jpg",
+    "player": "Harbhajan Singh",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/11675.jpg",
+    "player": "N Jagadeesan",
+    "type": "WK-Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/9783.jpg",
+    "player": "Monu Kumar",
+    "type": "Bowling Allrounder",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/10100.jpg",
+    "player": "Mitchell Santner",
+    "type": "Bowling Allrounder",
+    "nationality": "New Zealand",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/587.jpg",
+    "player": "Ravindra Jadeja",
+    "type": "Bowling Allrounder",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/9603.jpg",
+    "player": "Lungi Ngidi",
+    "type": "Bowler",
+    "nationality": "South Africa",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/1851.jpg",
+    "player": "Kedar Jadhav",
+    "type": "Batting Allrounder",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/242.jpg",
+    "player": "Dwayne Bravo",
+    "type": "Batting Allrounder",
+    "nationality": "West Indies",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/11813.jpg",
+    "player": "Ruturaj Gaikwad",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/1597.jpg",
+    "player": "Murali Vijay",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/7825.jpg",
+    "player": "Faf du Plessis",
+    "type": "Batsman",
+    "nationality": "South Africa",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/413.jpg",
+    "player": "Suresh Raina",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/265.jpg",
+    "player": "MS Dhoni",
+    "type": "WK-Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/6311.jpg",
+    "player": "Ambati Rayudu",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/158.jpg",
+    "player": "Shane Watson",
+    "type": "Batting Allrounder",
+    "nationality": "Australia",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/1920.jpg",
+    "player": "Isuru Udana",
+    "type": "Bowling Allrounder",
+    "nationality": "Sri Lanka",
+    "base": 50.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/14606.jpg",
+    "player": "Shahbaz Ahmed",
+    "type": "WK-Batsman",
+    "nationality": "India",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/508.jpg",
+    "player": "Dale Steyn",
+    "type": "Bowler",
+    "nationality": "South Africa",
+    "base": 200.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/10364.jpg",
+    "player": "Pavan Deshpande",
+    "type": "Batting Allrounder",
+    "nationality": "India",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/6262.jpg",
+    "player": "Kane Richardson",
+    "type": "Bowler",
+    "nationality": "Australia",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/13172.jpg",
+    "player": "Josh Philippe",
+    "type": "WK-Batsman",
+    "nationality": "Australia",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/8333.jpg",
+    "player": "Chris Morris",
+    "type": "Bowling Allrounder",
+    "nationality": "South Africa",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/1643.jpg",
+    "player": "Aaron Finch",
+    "type": "Batsman",
+    "nationality": "Australia",
+    "base": 100.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/9715.jpg",
+    "player": "Navdeep Saini",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/10945.jpg",
+    "player": "Washington Sundar",
+    "type": "Batting Allrounder",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/11195.jpg",
+    "player": "Shivam Dube",
+    "type": "Bowling Allrounder",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/13088.jpg",
+    "player": "Devdutt Padikkal",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/8298.jpg",
+    "player": "Gurkeerat Singh Mann",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/1858.jpg",
+    "player": "Umesh Yadav",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/8281.jpg",
+    "player": "Pawan Negi",
+    "type": "Bowling Allrounder",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/10808.jpg",
+    "player": "Mohammed Siraj",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/74.jpg",
+    "player": "Parthiv Patel",
+    "type": "WK-Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/370.jpg",
+    "player": "AB de Villiers",
+    "type": "WK-Batsman",
+    "nationality": "South Africa",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/7910.jpg",
+    "player": "Yuzvendra Chahal",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/6692.jpg",
+    "player": "Moeen Ali",
+    "type": "Batting Allrounder",
+    "nationality": "England",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/1413.jpg",
+    "player": "Virat Kohli",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/13252.jpg",
+    "player": "Lalit Yadav",
+    "type": "Batting Allrounder",
+    "nationality": "India",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/8989.jpg",
+    "player": "Marcus Stoinis",
+    "type": "Batting Allrounder",
+    "nationality": "Australia",
+    "base": 100.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/11307.jpg",
+    "player": "Tushar Deshpande",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/8181.jpg",
+    "player": "Mohit Sharma",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 50.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/9789.jpg",
+    "player": "Shimron Hetmyer",
+    "type": "Batsman",
+    "nationality": "West Indies",
+    "base": 50.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/9200.jpg",
+    "player": "Alex Carey",
+    "type": "WK-Batsman",
+    "nationality": "Australia",
+    "base": 50.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/6670.jpg",
+    "player": "Chris Woakes",
+    "type": "Bowling Allrounder",
+    "nationality": "England",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/6534.jpg",
+    "player": "Jason Roy",
+    "type": "Batsman",
+    "nationality": "England",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/1447.jpg",
+    "player": "Ajinkya Rahane",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/1593.jpg",
+    "player": "Ravichandran Ashwin",
+    "type": "Bowling Allrounder",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/8175.jpg",
+    "player": "Harshal Patel",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/8808.jpg",
+    "player": "Axar Patel",
+    "type": "Bowling Allrounder",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/11214.jpg",
+    "player": "Keemo Paul",
+    "type": "Bowling Allrounder",
+    "nationality": "West Indies",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/9585.jpg",
+    "player": "Kagiso Rabada",
+    "type": "Bowler",
+    "nationality": "South Africa",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/11158.jpg",
+    "player": "Sandeep Lamichhane",
+    "type": "Bowler",
+    "nationality": "Nepal",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/9781.jpg",
+    "player": "Avesh Khan",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/1454.jpg",
+    "player": "Amit Mishra",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/702.jpg",
+    "player": "Ishant Sharma",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/10744.jpg",
+    "player": "Rishabh Pant",
+    "type": "WK-Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/1446.jpg",
+    "player": "Shikhar Dhawan",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/12094.jpg",
+    "player": "Prithvi Shaw",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/9428.jpg",
+    "player": "Shreyas Iyer",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/16001.jpg",
+    "player": "Prince Balwant Rai",
+    "type": "Batting Allrounder",
+    "nationality": "India",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/15747.jpg",
+    "player": "Digvijay Deshmukh",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/13534.jpg",
+    "player": "Mohsin Khan",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/1601.jpg",
+    "player": "Saurabh Tiwary",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 50.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/7774.jpg",
+    "player": "Nathan Coulter-Nile",
+    "type": "Bowler",
+    "nationality": "Australia",
+    "base": 100.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/7752.jpg",
+    "player": "Chris Lynn",
+    "type": "Batsman",
+    "nationality": "Australia",
+    "base": 200.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/13748.jpg",
+    "player": "Sherfane Rutherford",
+    "type": "Batting Allrounder",
+    "nationality": "West Indies",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/1451.jpg",
+    "player": "Dhawal Kulkarni",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/8117.jpg",
+    "player": "Trent Boult",
+    "type": "Bowler",
+    "nationality": "New Zealand",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/8182.jpg",
+    "player": "Jayant Yadav",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/6315.jpg",
+    "player": "Aditya Tare",
+    "type": "WK-Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/12344.jpg",
+    "player": "Anukul Roy",
+    "type": "Batting Allrounder",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/10276.jpg",
+    "player": "Ishan Kishan",
+    "type": "WK-Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/12087.jpg",
+    "player": "Rahul Chahar",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/10947.jpg",
+    "player": "Anmolpreet Singh",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/7915.jpg",
+    "player": "Suryakumar Yadav",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/11311.jpg",
+    "player": "Krunal Pandya",
+    "type": "Batting Allrounder",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/111.jpg",
+    "player": "Lasith Malinga",
+    "type": "Bowler",
+    "nationality": "Sri Lanka",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/9311.jpg",
+    "player": "Jasprit Bumrah",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/7624.jpg",
+    "player": "Mitchell McClenaghan",
+    "type": "Bowler",
+    "nationality": "New Zealand",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/8520.jpg",
+    "player": "Quinton de Kock",
+    "type": "WK-Batsman",
+    "nationality": "South Africa",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/657.jpg",
+    "player": "Kieron Pollard",
+    "type": "Batting Allrounder",
+    "nationality": "West Indies",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/9647.jpg",
+    "player": "Hardik Pandya",
+    "type": "Batting Allrounder",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/576.jpg",
+    "player": "Rohit Sharma",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/9295.jpg",
+    "player": "Nikhil Naik",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/9237.jpg",
+    "player": "Pravin Tambe",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/12254.jpg",
+    "player": "Tom Banton",
+    "type": "WK-Batsman",
+    "nationality": "England",
+    "base": 100.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/10162.jpg",
+    "player": "Chris Green",
+    "type": "Bowling Allrounder",
+    "nationality": "Australia",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/12930.jpg",
+    "player": "Manimaran Siddharth",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/12926.jpg",
+    "player": "Varun Chakravarthy",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 30.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/9012.jpg",
+    "player": "Rahul Tripathi",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/8095.jpg",
+    "player": "Pat Cummins",
+    "type": "Bowler",
+    "nationality": "Australia",
+    "base": 200.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/624.jpg",
+    "player": "Eoin Morgan",
+    "type": "Batsman",
+    "nationality": "England",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/10896.jpg",
+    "player": "Rinku Singh",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/9218.jpg",
+    "player": "Siddhesh Lad",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/10551.jpg",
+    "player": "Prasidh Krishna",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/12345.jpg",
+    "player": "Shivam Mavi",
+    "type": "Bowling Allrounder",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/12092.jpg",
+    "player": "Kamlesh Nagarkoti",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/6496.jpg",
+    "player": "Harry Gurney",
+    "type": "Bowler",
+    "nationality": "England",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/8944.jpg",
+    "player": "Sandeep Warrier",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/9204.jpg",
+    "player": "Nitish Rana",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/10692.jpg",
+    "player": "Lockie Ferguson",
+    "type": "Bowler",
+    "nationality": "New Zealand",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/11808.jpg",
+    "player": "Shubman Gill",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/8292.jpg",
+    "player": "Kuldeep Yadav",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/2276.jpg",
+    "player": "Sunil Narine",
+    "type": "Bowler",
+    "nationality": "West Indies",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/7736.jpg",
+    "player": "Andre Russell",
+    "type": "Bowling Allrounder",
+    "nationality": "West Indies",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/145.jpg",
+    "player": "Dinesh Karthik",
+    "type": "WK-Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/9522.jpg",
+    "player": "Tom Curran",
+    "type": "Bowling Allrounder",
+    "nationality": "England",
+    "base": 100.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/9617.jpg",
+    "player": "Andrew Tye",
+    "type": "Bowler",
+    "nationality": "Australia",
+    "base": 100.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/7716.jpg",
+    "player": "Aniruddha Joshi",
+    "type": "Bowling Allrounder",
+    "nationality": "India",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/11442.jpg",
+    "player": "Oshane Thomas",
+    "type": "Bowler",
+    "nationality": "West Indies",
+    "base": 50.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/6349.jpg",
+    "player": "David Miller",
+    "type": "Batsman",
+    "nationality": "South Africa",
+    "base": 75.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/13136.jpg",
+    "player": "Kartik Tyagi",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/14696.jpg",
+    "player": "Akash Singh",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/13135.jpg",
+    "player": "Anuj Rawat",
+    "type": "WK-Batsman",
+    "nationality": "India",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/13940.jpg",
+    "player": "Yashasvi Jaiswal",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/6327.jpg",
+    "player": "Jaydev Unadkat",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 100.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/527.jpg",
+    "player": "Robin Uthappa",
+    "type": "WK-Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/9693.jpg",
+    "player": "Rahul Tewatia",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/12627.jpg",
+    "player": "Mayank Markande",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/8924.jpg",
+    "player": "Ankit Rajpoot",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/6293.jpg",
+    "player": "Varun Aaron",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/9746.jpg",
+    "player": "Shreyas Gopal",
+    "type": "Bowling Allrounder",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/10919.jpg",
+    "player": "Shashank Singh",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/8271.jpg",
+    "player": "Sanju Samson",
+    "type": "WK-Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/12305.jpg",
+    "player": "Riyan Parag",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/8358.jpg",
+    "player": "Manan Vohra",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/10954.jpg",
+    "player": "Mahipal Lomror",
+    "type": "Batting Allrounder",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/2258.jpg",
+    "player": "Jos Buttler",
+    "type": "WK-Batsman",
+    "nationality": "England",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/11540.jpg",
+    "player": "Jofra Archer",
+    "type": "Bowling Allrounder",
+    "nationality": "England",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/6557.jpg",
+    "player": "Ben Stokes",
+    "type": "Batting Allrounder",
+    "nationality": "England",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/2250.jpg",
+    "player": "Steven Smith",
+    "type": "Batsman",
+    "nationality": "Australia",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/11631.jpg",
+    "player": "Sanjay Yadav",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/14628.jpg",
+    "player": "Abdul Samad",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/9785.jpg",
+    "player": "Fabian Allen",
+    "type": "Batting Allrounder",
+    "nationality": "West Indies",
+    "base": 50.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/8696.jpg",
+    "player": "Bavanaka Sandeep",
+    "type": "Batting Allrounder",
+    "nationality": "India",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/6250.jpg",
+    "player": "Mitchell Marsh",
+    "type": "Batting Allrounder",
+    "nationality": "Australia",
+    "base": 200.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/12089.jpg",
+    "player": "Priyam Garg",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/10213.jpg",
+    "player": "Virat Singh",
+    "type": "Batting Allrounder",
+    "nationality": "India",
+    "base": 20.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/1465.jpg",
+    "player": "Wriddhiman Saha",
+    "type": "WK-Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/8204.jpg",
+    "player": "Vijay Shankar",
+    "type": "Batting Allrounder",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/10225.jpg",
+    "player": "T Natarajan",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/10952.jpg",
+    "player": "K Khaleel Ahmed",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/1828.jpg",
+    "player": "Siddarth Kaul",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/1807.jpg",
+    "player": "Shreevats Goswami",
+    "type": "WK-Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/7906.jpg",
+    "player": "Shahbaz Nadeem",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/8356.jpg",
+    "player": "Sandeep Sharma",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/10738.jpg",
+    "player": "Rashid Khan",
+    "type": "Bowler",
+    "nationality": "Afghanistan",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/3007.jpg",
+    "player": "Mohammad Nabi",
+    "type": "Bowling Allrounder",
+    "nationality": "Afghanistan",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/1836.jpg",
+    "player": "Manish Pandey",
+    "type": "Batsman",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/6326.jpg",
+    "player": "Kane Williamson",
+    "type": "Batsman",
+    "nationality": "New Zealand",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/6507.jpg",
+    "player": "Jonny Bairstow",
+    "type": "WK-Batsman",
+    "nationality": "England",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/1739.jpg",
+    "player": "David Warner",
+    "type": "Batsman",
+    "nationality": "Australia",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/9572.jpg",
+    "player": "Billy Stanlake",
+    "type": "Bowler",
+    "nationality": "Australia",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/1726.jpg",
+    "player": "Bhuvneshwar Kumar",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/10267.jpg",
+    "player": "Basil Thampi",
+    "type": "Bowler",
+    "nationality": "India",
+    "base": 150.0
+  },
+  {
+    "imgsrc": "https://www.cricbuzz.com/stats/img/faceImages/12086.jpg",
+    "player": "Abhishek Sharma",
+    "type": "Batting Allrounder",
+    "nationality": "India",
+    "base": 150.0
+  }
+]

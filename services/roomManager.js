@@ -1,5 +1,7 @@
 const redisClient = require('../redisConnection.js');
 const crypto = require("crypto");
+var playerList = require('../data/players.json')
+
 var roomCount = new Map();
 var privateRoomCount = new Map();
 
@@ -11,9 +13,11 @@ createRoom = (io, socket, addUser, user, type) =>{
 
     if(type === "public"){
         roomCount.set(id,0);
+
         return [addUser(io,id,socket,"new"),id];
     }else{
         privateRoomCount.set(id,0);
+
         return [addUser(io,id,socket,"new"),id];
     }
 
