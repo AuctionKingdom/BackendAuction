@@ -1,6 +1,6 @@
 const redisClient = require('../redisConnection.js');
 const { roomCount, privateRoomCount } = require('./roomManager.js');
-let num_of_users = 3;
+let num_of_users = 2;
 var playerList = require('../data/players.json')
 
 
@@ -138,7 +138,7 @@ getPlayer = (io, roomId) =>{
 startNewBid = (io , roomId) =>{
 
   getPlayer(io,roomId);
-  io.to(roomName).emit('newPlayer',io.nsps['/'].adapter.rooms[roomId].currentPlayer);
+  io.to(roomId).emit('newPlayer',io.nsps['/'].adapter.rooms[roomId].currentPlayer);
 
 }
 
@@ -155,18 +155,19 @@ startMatch = async(io,roomId, socket)=>{
     getPlayer(io, roomId);
 
     await setTimeout(()=>{
-        io.to(roomName).emit('newPlayer',io.nsps['/'].adapter.rooms[roomId].currentPlayer)
+        io.to(roomId).emit('newPlayer',io.nsps['/'].adapter.rooms[roomId].currentPlayer)
     },500)
 }
 
-newBid = (io,roomName, bid, email )=>{
+newBid = (io,roomId, bid, email )=>{
 
     if(bid > io.nsps['/'].adapter.rooms[roomId].currentPlayer.currentBid && email !== io.nsps['/'].adapter.rooms[roomId].currentPlayer.highestBidder){
        io.nsps['/'].adapter.rooms[roomId].currentPlayer.currentBid = bid;
        io.nsps['/'].adapter.rooms[roomId].currentPlayer.status = 1;
        io.nsps['/'].adapter.rooms[roomId].currentPlayer.highestBidder = email;
+      io.to(roomId).emit('newBid', io.nsps['/'].adapter.rooms[roomId].currentPlayer);
     }
-    io.to(roomName).emit('newBid', io.nsps['/'].adapter.rooms[roomId].currentPlayer);
+
 }
 
 module.exports = {
@@ -175,5 +176,6 @@ module.exports = {
   createRoom,
   closeCurrentPlayer,
   startClockSignal,
+  startMatch,
   newBid
 };

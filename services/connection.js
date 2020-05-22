@@ -1,5 +1,5 @@
 const { createRoom, joinRoom, availablePublicRoom }  = require('./roomManager.js');
-const { PublicAddUser, PrivateAddUser, startMatch, startClockSignal, closeCurrentPlayer, } = require('./handler.js');
+const { PublicAddUser, PrivateAddUser, startMatch, startClockSignal, closeCurrentPlayer, newBid} = require('./handler.js');
 const redisClient = require('../redisConnection.js');
 const jwt = require('jsonwebtoken')
 
@@ -33,7 +33,7 @@ connection = (io)=>{
 													setTimeout(()=>{
 														console.log(object);
 														io.to(results[1]).emit('people',object)
-													},500)
+													},1000)
 							 			})
 								}
 					  }else{
@@ -55,10 +55,9 @@ connection = (io)=>{
 												 setTimeout(()=>{
 													 	console.log(object);
 														io.to(result[1]).emit('people',object)
-												 },500)
+												 },1000)
 											})
 									}
-									startMatch(io,result[1],socket);
 							}else{
 									socket.emit('failure',"Invalid JWT Token")
 							}
@@ -83,7 +82,7 @@ connection = (io)=>{
 											 setTimeout(()=>{
 													console.log(object);
 													io.to(result[1]).emit('people',object)
-											 },500)
+											 },1000)
 										})
 								}
 						}else{
@@ -93,13 +92,14 @@ connection = (io)=>{
 
 
 					/**
-					 Link add is called when the user joins directly using  a Link
-					 */
+					 	Link add is called when the user joins directly using  a Link
+					*/
 
 					 socket.on('Link Join', data=>{
 
 						 	let jwtToken = JSON.parse(data.token);
 							let roomId = data.roomId;
+							console.log(roomId)
 							const decode = jwt.verify(jwtToken.token, process.env.jwt_secret)
 							if(decode._id === jwtToken.user._id)
 							{
@@ -125,20 +125,20 @@ connection = (io)=>{
 						data : token roomId currentBid
 
 					*/
-					socket.on('Bid', (data) =>{
+					socket.on('Bid', data =>{
 
+							console.log(data)
 							clearTimeout(BidDone)
 							clearTimeout(BidIndication)
 
-
-							BidIndication = setTimeout((data)=>{
-									startClockSignal(data.roomId);
+							newBid(io, data.roomId, data.bid, data.email);
+							BidIndication = setTimeout(() =>{
+									startClockSignal(io, data.roomId);
 							},10000)
 
-							BidDone = setTimeout((data)=>{
-									closeCurrentPlayer(data.roomId);
+							BidDone = setTimeout(()=>{
+									closeCurrentPlayer(io, data.roomId);
 							},20000)
-
 
 
 					})

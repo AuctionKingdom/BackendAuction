@@ -57,7 +57,7 @@ availablePublicRoom = (io, socket, addUser, user)=>{
 
   const obj = {};
   for (const key of roomCount.keys()) {
-    if(roomCount.get(key) < 3){
+    if(roomCount.get(key) < 2){
       redisClient.hget(key,user.email,function(err,object){
           if(object){
              console.log(`Player already in the Room , So just Redirect`)
@@ -67,7 +67,7 @@ availablePublicRoom = (io, socket, addUser, user)=>{
             console.log(`Public Room Error: ${err}`)
           }
       })
-      redisClient.hmset(roomid,user.email,user.name);
+      redisClient.hmset(key,user.email,user.name);
       return [addUser(io,key,socket,"new"),key]
     }
   }
