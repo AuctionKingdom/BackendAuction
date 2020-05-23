@@ -103,12 +103,16 @@ closeCurrentPlayer = (io, roomId) =>{
 /**
   Randomizes the Player List
   sets the index to 0 _---> Get the first player
+
+  Initial bid Indication even before anyone makes a bid attempt
 */
 
 setPlayerList = (io,roomId) =>{
   var RandomList = [...playerList].sort(function(a,b){Math.random()-0.5})
   io.nsps['/'].adapter.rooms[roomId].playerList = [...RandomList]
   io.nsps['/'].adapter.rooms[roomId].curr_index = 0
+  io.nsps['/'].adapter.rooms[roomId].bidIndication = null
+  io.nsps['/'].adapter.rooms[roomId].bidDone = null
 }
 
 
@@ -130,6 +134,29 @@ getPlayer = (io, roomId) =>{
 }
 
 /**
+    For a new Player introduced to the bidding system, one time timeout feature is done
+*/
+
+beforeBidSignal = (io, roomId) =>{
+
+  io.nsps['/'].adapter.rooms[roomId].bidIndication = setTimeout(()=>{
+                                                          startClockSignal(io, roomId);
+                                                    },20000)
+  io.nsps['/'].adapter.rooms[roomId].bidDone = setTimeout(()=>{
+                                                          closeCurrentPlayer(io, roomId);
+                                                    },30000)
+}
+
+// Clears the one-time timer initialized at the beginning of the Player Bidding
+
+clearBidSignal = async(io, roomId) =>{
+
+  await clearTimeout(io.nsps['/'].adapter.rooms[roomId].bidIndication)
+  await clearTimeout(io.nsps['/'].adapter.rooms[roomId].bidDone)
+
+}
+
+/**
 
   Called after closing on one player, changing to new Player
 
@@ -139,6 +166,8 @@ startNewBid = (io , roomId) =>{
 
   getPlayer(io,roomId);
   io.to(roomId).emit('newPlayer',io.nsps['/'].adapter.rooms[roomId].currentPlayer);
+
+  beforeBidSignal(io,roomId);
 
 }
 
@@ -157,9 +186,16 @@ startMatch = async(io,roomId, socket)=>{
     await setTimeout(()=>{
         io.to(roomId).emit('newPlayer',io.nsps['/'].adapter.rooms[roomId].currentPlayer)
     },500)
+
+    beforeBidSignal(io,roomId);
+
 }
 
+// Clears the initial Timer and proceeds to set or reject the bid made by the user
+
 newBid = (io,roomId, bid, email )=>{
+
+    clearBidSignal(io, roomId)
 
     if(bid > io.nsps['/'].adapter.rooms[roomId].currentPlayer.currentBid && email !== io.nsps['/'].adapter.rooms[roomId].currentPlayer.highestBidder){
        io.nsps['/'].adapter.rooms[roomId].currentPlayer.currentBid = bid;

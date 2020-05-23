@@ -28,7 +28,7 @@ joinRoom = (io, socket, roomid, addUser, user) =>{
   /**  Difficult to add roomid thats random so a mapping for roomName, id
       should be maintained   */
     if(redisClient.exists(roomid)){
-        if(privateRoomCount.get(roomid) < 3){
+        if(privateRoomCount.get(roomid) < 2){
             redisClient.hget(roomid,user.email,function(err,object){
                if(object){
                   console.log(user);
