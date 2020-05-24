@@ -4,20 +4,25 @@ var playerList = require('../data/players.json')
 
 var roomCount = new Map();
 var privateRoomCount = new Map();
+var UserToPlayer = new Map();
 
 createRoom = (io, socket, addUser, user, type) =>{
 
     //Created a random RoomName and attached the client name
     const id = crypto.randomBytes(5).toString("hex");
-    redisClient.hmset(id,user.email,user.name);
+    redisClient.hmset(id,user.email,JSON.stringify({name:user.name, wallet:13000}));
 
     if(type === "public"){
         roomCount.set(id,0);
-
+        let initialSet = {...UserToPlayer[user.email]}
+        initialSet[id] = 0
+        UserToPlayer[user.email] = {...initialSet}
         return [addUser(io,id,socket,"new"),id];
     }else{
         privateRoomCount.set(id,0);
-
+        let initialSet = {...UserToPlayer[user.email]}
+        initialSet[id] = 0
+        UserToPlayer[user.email] = {...initialSet}
         return [addUser(io,id,socket,"new"),id];
     }
 
@@ -31,12 +36,14 @@ joinRoom = (io, socket, roomid, addUser, user) =>{
         if(privateRoomCount.get(roomid) < 2){
             redisClient.hget(roomid,user.email,function(err,object){
                if(object){
-                  console.log(user);
-                  console.log(object);
+
                   return [addUser(io,roomid,socket,"present"), roomid];
                }
             })
-            redisClient.hmset(roomid,user.email,user.name);
+            let initialSet = {...UserToPlayer[user.email]}
+            initialSet[roomid] = 0
+            UserToPlayer[user.email] = {...initialSet}
+            redisClient.hmset(roomid,user.email,JSON.stringify({name:user.name, wallet:13000}));
             return [addUser(io,roomid,socket,"new"),roomid];
         }
     }else{
@@ -67,7 +74,10 @@ availablePublicRoom = (io, socket, addUser, user)=>{
             console.log(`Public Room Error: ${err}`)
           }
       })
-      redisClient.hmset(key,user.email,user.name);
+      let initialSet = {...UserToPlayer[user.email]}
+      initialSet[key] = 0
+      UserToPlayer[user.email] = {...initialSet}
+      redisClient.hmset(key,user.email,JSON.stringify({name:user.name, wallet:13000}));
       return [addUser(io,key,socket,"new"),key]
     }
   }
@@ -81,5 +91,6 @@ module.exports = {
   privateRoomCount,
   joinRoom,
   availablePublicRoom,
-  roomCount
+  roomCount,
+  UserToPlayer,
 }

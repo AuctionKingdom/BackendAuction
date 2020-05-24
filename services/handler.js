@@ -1,5 +1,5 @@
 const redisClient = require('../redisConnection.js');
-const { roomCount, privateRoomCount } = require('./roomManager.js');
+const { roomCount, privateRoomCount, UserToPlayer} = require('./roomManager.js');
 let num_of_users = 2;
 var playerList = require('../data/players.json')
 
@@ -92,13 +92,60 @@ startClockSignal = (io, roomId) =>{
 */
 closeCurrentPlayer = (io, roomId) =>{
 
+  let highestBidder = io.nsps['/'].adapter.rooms[roomId].currentPlayer.highestBidder;
   let playerName = io.nsps['/'].adapter.rooms[roomId].currentPlayer.player;
   let playerDetails = JSON.stringify(io.nsps['/'].adapter.rooms[roomId].currentPlayer)
   redisClient.hmset(`${roomId}_players`, playerName, playerDetails);
+
+  console.log(io.nsps['/'].adapter.rooms[roomId].currentPlayer);
+  let currentBid = io.nsps['/'].adapter.rooms[roomId].currentPlayer.currentBid;
+  // Only if someone has offered a bid for the player execute this code.. Inorder to prevent null values
+  if(io.nsps['/'].adapter.rooms[roomId].currentPlayer.status === 1){
+        redisClient.hget(roomId, highestBidder, (err,object)=>{
+
+            if(object){
+                userDetails = JSON.parse(object)
+                userDetails['wallet'] = userDetails['wallet']-currentBid;
+
+              //Test Purpose
+                console.log("Closing Player to User")
+                console.log(userDetails)
+
+                redisClient.hmset(roomId, highestBidder, JSON.stringify(userDetails))
+            }
+        })
+        console.log(highestBidder)
+        UserToPlayer[highestBidder][roomId] +=1
+  }
+
   io.nsps['/'].adapter.rooms[roomId].curr_index +=1;
   startNewBid(io, roomId)
 
 }
+
+
+/**
+  Shuffle Array
+*/
+shuffle = (array) => {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
 
 /**
   Randomizes the Player List
@@ -108,8 +155,8 @@ closeCurrentPlayer = (io, roomId) =>{
 */
 
 setPlayerList = (io,roomId) =>{
-  var RandomList = [...playerList].sort(function(a,b){Math.random()-0.5})
-  io.nsps['/'].adapter.rooms[roomId].playerList = [...RandomList]
+
+  io.nsps['/'].adapter.rooms[roomId].playerList = shuffle(JSON.parse(JSON.stringify(playerList)))
   io.nsps['/'].adapter.rooms[roomId].curr_index = 0
   io.nsps['/'].adapter.rooms[roomId].bidIndication = null
   io.nsps['/'].adapter.rooms[roomId].bidDone = null
@@ -129,7 +176,7 @@ getPlayer = (io, roomId) =>{
   Player.currentBid = 0
   Player.highestBidder = null
   Player.status = 0
-  io.nsps['/'].adapter.rooms[roomId].currentPlayer = Player;
+  io.nsps['/'].adapter.rooms[roomId].currentPlayer = {...Player};
 
 }
 
@@ -197,12 +244,28 @@ newBid = (io,roomId, bid, email )=>{
 
     clearBidSignal(io, roomId)
 
-    if(bid > io.nsps['/'].adapter.rooms[roomId].currentPlayer.currentBid && email !== io.nsps['/'].adapter.rooms[roomId].currentPlayer.highestBidder){
-       io.nsps['/'].adapter.rooms[roomId].currentPlayer.currentBid = bid;
-       io.nsps['/'].adapter.rooms[roomId].currentPlayer.status = 1;
-       io.nsps['/'].adapter.rooms[roomId].currentPlayer.highestBidder = email;
-      io.to(roomId).emit('newBid', io.nsps['/'].adapter.rooms[roomId].currentPlayer);
+    redisClient.hget(roomId, email, (err,object)=>{
+        if(object){
+            let Details = JSON.parse(object)
+            /**
+               Condition that whether he has enough fund to pull off a 11 memeber team or if already has 11 members
+               Does he have enough fund for 11 members
+            */
+
+            if( (UserToPlayer[email][roomId] <= 11 && (Details.wallet- bid - (11-UserToPlayer[email][roomId])*20) > 0) ||
+                (UserToPlayer[email][roomId] > 11 && (Details.wallet - bid)>=0)
+              ){
+
+                if(bid > io.nsps['/'].adapter.rooms[roomId].currentPlayer.currentBid && email !== io.nsps['/'].adapter.rooms[roomId].currentPlayer.highestBidder){
+                    io.nsps['/'].adapter.rooms[roomId].currentPlayer.currentBid = parseInt(bid);
+                    io.nsps['/'].adapter.rooms[roomId].currentPlayer.status = 1;
+                    io.nsps['/'].adapter.rooms[roomId].currentPlayer.highestBidder = email;
+                    console.log(io.nsps['/'].adapter.rooms[roomId].currentPlayer.currentBid)
+                    io.to(roomId).emit('newBid', io.nsps['/'].adapter.rooms[roomId].currentPlayer);
+                }
+            }
     }
+  })
 
 }
 
