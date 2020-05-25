@@ -116,6 +116,11 @@ closeCurrentPlayer = (io, roomId) =>{
         })
         console.log(highestBidder)
         UserToPlayer[highestBidder][roomId] +=1
+  }else{
+
+      io.nsps['/'].adapter.rooms[roomId].UnSold = [...io.nsps['/'].adapter.rooms[roomId].UnSold,
+                                                        io.nsps['/'].adapter.rooms[roomId].currentPlayer]
+
   }
 
   io.nsps['/'].adapter.rooms[roomId].curr_index +=1;
@@ -156,10 +161,12 @@ shuffle = (array) => {
 
 setPlayerList = (io,roomId) =>{
 
-  io.nsps['/'].adapter.rooms[roomId].playerList = shuffle(JSON.parse(JSON.stringify(playerList)))
-  io.nsps['/'].adapter.rooms[roomId].curr_index = 0
-  io.nsps['/'].adapter.rooms[roomId].bidIndication = null
-  io.nsps['/'].adapter.rooms[roomId].bidDone = null
+  io.nsps['/'].adapter.rooms[roomId].playerList = shuffle(JSON.parse(JSON.stringify(playerList)));
+  io.nsps['/'].adapter.rooms[roomId].curr_index = 0;
+  io.nsps['/'].adapter.rooms[roomId].bidIndication = null;
+  io.nsps['/'].adapter.rooms[roomId].bidDone = null;
+  io.nsps['/'].adapter.rooms[roomId].UnSold = [];
+  io.nsps['/'].adapter.rooms[roomId].UnSoldRequest = 0;
 }
 
 

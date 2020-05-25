@@ -6,6 +6,14 @@ var roomCount = new Map();
 var privateRoomCount = new Map();
 var UserToPlayer = new Map();
 
+initialUserSet = (roomId, email) =>{
+
+  let initialSet = {...UserToPlayer[email]}
+  initialSet[id] = 0
+  UserToPlayer[email] = {...initialSet}
+
+}
+
 createRoom = (io, socket, addUser, user, type) =>{
 
     //Created a random RoomName and attached the client name
@@ -14,15 +22,13 @@ createRoom = (io, socket, addUser, user, type) =>{
 
     if(type === "public"){
         roomCount.set(id,0);
-        let initialSet = {...UserToPlayer[user.email]}
-        initialSet[id] = 0
-        UserToPlayer[user.email] = {...initialSet}
+        initialUserSet(id, user.email)
+
         return [addUser(io,id,socket,"new"),id];
     }else{
         privateRoomCount.set(id,0);
-        let initialSet = {...UserToPlayer[user.email]}
-        initialSet[id] = 0
-        UserToPlayer[user.email] = {...initialSet}
+        initialUserSet(id,user.email);
+
         return [addUser(io,id,socket,"new"),id];
     }
 
@@ -33,19 +39,21 @@ joinRoom = (io, socket, roomid, addUser, user) =>{
   /**  Difficult to add roomid thats random so a mapping for roomName, id
       should be maintained   */
     if(redisClient.exists(roomid)){
-        if(privateRoomCount.get(roomid) < 2){
+        console.log('Room Exists....')
             redisClient.hget(roomid,user.email,function(err,object){
                if(object){
-
                   return [addUser(io,roomid,socket,"present"), roomid];
                }
             })
-            let initialSet = {...UserToPlayer[user.email]}
-            initialSet[roomid] = 0
-            UserToPlayer[user.email] = {...initialSet}
-            redisClient.hmset(roomid,user.email,JSON.stringify({name:user.name, wallet:13000}));
-            return [addUser(io,roomid,socket,"new"),roomid];
-        }
+            if(privateRoomCount.get(roomid) < 2){
+
+                initialUserSet(id, user.email)
+                redisClient.hmset(roomid,user.email,JSON.stringify({name:user.name, wallet:13000}));
+                return [addUser(io,roomid,socket,"new"),roomid];
+
+            }else{
+                return [false, roomid];
+            }
     }else{
         return [false, roomid];
     }
@@ -64,24 +72,25 @@ availablePublicRoom = (io, socket, addUser, user)=>{
 
   const obj = {};
   for (const key of roomCount.keys()) {
-    if(roomCount.get(key) < 2){
+
       redisClient.hget(key,user.email,function(err,object){
-          if(object){
+        if(object){
+
              console.log(`Player already in the Room , So just Redirect`)
              return [addUser(io,key,socket,"present"),key]
-          }
-          if(err){
-            console.log(`Public Room Error: ${err}`)
-          }
-      })
-      let initialSet = {...UserToPlayer[user.email]}
-      initialSet[key] = 0
-      UserToPlayer[user.email] = {...initialSet}
-      redisClient.hmset(key,user.email,JSON.stringify({name:user.name, wallet:13000}));
-      return [addUser(io,key,socket,"new"),key]
-    }
-  }
 
+        }else if(roomCount.get(key) < 2){
+
+            initialUserSet(key, user.email)
+            redisClient.hmset(key,user.email,JSON.stringify({name:user.name, wallet:13000}));
+            return [addUser(io,key,socket,"new"),key]
+
+        }
+        if(err){
+          console.log(`Public Room Error: ${err}`)
+        }
+      })
+  }
   return createRoom(io, socket, addUser, user, "public")
 
 }
