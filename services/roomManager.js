@@ -9,7 +9,7 @@ var UserToPlayer = new Map();
 initialUserSet = (roomId, email) =>{
 
   let initialSet = {...UserToPlayer[email]}
-  initialSet[id] = 0
+  initialSet[roomId] = 0
   UserToPlayer[email] = {...initialSet}
 
 }

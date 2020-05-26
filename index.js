@@ -1,10 +1,14 @@
 'use strict';
 
 let express = require('express');
+const cors = require('cors')
 let app = express();
 const port = process.env.PORT || 8080;
 
+app.use(cors())
+
 let io = require('socket.io')(app.listen(port,()=>console.log(`Listening on port ${port}`)));
+
 
 const redis = require('./redisConnection.js');
 
@@ -16,7 +20,7 @@ dotenv.config()
 const bodyparser = require('body-parser');
 const cookieparser = require('cookie-parser')
 const expressvalidator = require('express-validator');
-const cors = require('cors')
+
 
 require('./services/connection.js')(io);
 
@@ -45,15 +49,7 @@ app.use(morgan("dev"));
 app.use(bodyparser.json())
 app.use(expressvalidator())
 app.use(cookieparser())
-app.use(cors());
 
-app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    next();
-});
 
 //Route to the required routes
 app.use("/",authRoutes);
