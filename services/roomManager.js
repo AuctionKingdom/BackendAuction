@@ -47,7 +47,7 @@ joinRoom = (io, socket, roomid, addUser, user) =>{
             })
             if(privateRoomCount.get(roomid) < 2){
 
-                initialUserSet(id, user.email)
+                initialUserSet(roomid, user.email)
                 redisClient.hmset(roomid,user.email,JSON.stringify({name:user.name, wallet:13000}));
                 return [addUser(io,roomid,socket,"new"),roomid];
 
