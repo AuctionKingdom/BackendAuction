@@ -11,7 +11,7 @@ var playerList = require('../data/players.json')
     else
         room is full and cannot be added
 */
-PublicAddUser = async(io, roomId, socket, condition)=>{
+PublicAddUser = (io, roomId, socket, condition)=>{
 
   // The User is new to the Room . Add Him and increment the count
   let count = roomCount.get(roomId);
@@ -41,12 +41,12 @@ PublicAddUser = async(io, roomId, socket, condition)=>{
 
 
 
-PrivateAddUser = async(io, roomId, socket, condition )=>{
+PrivateAddUser = (io, roomId, socket, condition )=>{
 
 
     let count = privateRoomCount.get(roomId);
 
-    if(condition === "new"){
+    if(condition.localeCompare("new")===0){
         if(count < num_of_users){
               socket.join(roomId);
 
@@ -55,31 +55,33 @@ PrivateAddUser = async(io, roomId, socket, condition )=>{
               socket.emit('success',`${roomId}`);
 
               //If everyone is there in the room start the match
-              if(count+1 === num_of_users)
-                startMatch(io, roomId, socket);
+              if(count+1 === num_of_users){
+                   startMatch(io, roomId, socket);
+              }
+
 
               return true;
 
-        }else if(condition === "present"){
+        }
+    }else if(condition.localeCompare("present") === 0){
 
             socket.join(roomId);
-            console.log(roomId);
+            console.log(`User added to already present room`);
             socket.emit('success',`${roomId}`);
             return true;
 
-        }
+      }
 
         socket.emit('failure','This Room is Full');
         return false;
 
-    }
 }
 
 //Sends a Timeout signal to the client asking his clock to start counting
 
 startClockSignal = (io, roomId) =>{
 
-   io.to(roomId).emit('Begin timeout','10s')
+     io.to(roomId).emit('Begin timeout','10s')
 
 }
 
@@ -92,39 +94,45 @@ startClockSignal = (io, roomId) =>{
 */
 closeCurrentPlayer = (io, roomId) =>{
 
-  let highestBidder = io.nsps['/'].adapter.rooms[roomId].currentPlayer.highestBidder;
-  let playerName = io.nsps['/'].adapter.rooms[roomId].currentPlayer.player;
-  let playerDetails = JSON.stringify(io.nsps['/'].adapter.rooms[roomId].currentPlayer)
-  redisClient.hmset(`${roomId}_players`, playerName, playerDetails);
+  try{
 
-  console.log(io.nsps['/'].adapter.rooms[roomId].currentPlayer);
-  let currentBid = io.nsps['/'].adapter.rooms[roomId].currentPlayer.currentBid;
-  // Only if someone has offered a bid for the player execute this code.. Inorder to prevent null values
-  if(io.nsps['/'].adapter.rooms[roomId].currentPlayer.status === 1){
-        redisClient.hget(roomId, highestBidder, (err,object)=>{
+        let highestBidder = io.nsps['/'].adapter.rooms[roomId].currentPlayer.highestBidder;
+        let playerName = io.nsps['/'].adapter.rooms[roomId].currentPlayer.player;
+        let playerDetails = JSON.stringify(io.nsps['/'].adapter.rooms[roomId].currentPlayer)
 
-            if(object){
-                userDetails = JSON.parse(object)
-                userDetails['wallet'] = userDetails['wallet']-currentBid;
+        redisClient.hmset(`${roomId}_players`, playerName, playerDetails);
 
-              //Test Purpose
-                console.log("Closing Player to User")
-                console.log(userDetails)
+        let currentBid = io.nsps['/'].adapter.rooms[roomId].currentPlayer.currentBid;
+        // Only if someone has offered a bid for the player execute this code.. Inorder to prevent null values
 
-                redisClient.hmset(roomId, highestBidder, JSON.stringify(userDetails))
-            }
-        })
-        console.log(highestBidder)
-        UserToPlayer[highestBidder][roomId] +=1
-  }else{
+        if(io.nsps['/'].adapter.rooms[roomId].currentPlayer.status === 1){
+              redisClient.hget(roomId, highestBidder, (err,object)=>{
 
-      io.nsps['/'].adapter.rooms[roomId].UnSold = [...io.nsps['/'].adapter.rooms[roomId].UnSold,
-                                                        io.nsps['/'].adapter.rooms[roomId].currentPlayer]
+                  if(object){
+                      userDetails = JSON.parse(object)
+                      userDetails['wallet'] = userDetails['wallet']-currentBid;
+
+                      redisClient.hmset(roomId, highestBidder, JSON.stringify(userDetails))
+                  }
+              })
+              console.log(highestBidder)
+              UserToPlayer[highestBidder][roomId] +=1
+        }else{
+
+            io.nsps['/'].adapter.rooms[roomId].UnSold = [...io.nsps['/'].adapter.rooms[roomId].UnSold,
+                                                              io.nsps['/'].adapter.rooms[roomId].currentPlayer]
+
+        }
+
+        io.nsps['/'].adapter.rooms[roomId].curr_index +=1;
+        startNewBid(io, roomId)
 
   }
+  catch(error){
 
-  io.nsps['/'].adapter.rooms[roomId].curr_index +=1;
-  startNewBid(io, roomId)
+        console.log(error);
+
+  }
 
 }
 
@@ -133,6 +141,7 @@ closeCurrentPlayer = (io, roomId) =>{
   Shuffle Array
 */
 shuffle = (array) => {
+
   var currentIndex = array.length, temporaryValue, randomIndex;
 
   // While there remain elements to shuffle...
@@ -203,10 +212,10 @@ beforeBidSignal = (io, roomId) =>{
 
 // Clears the one-time timer initialized at the beginning of the Player Bidding
 
-clearBidSignal = async(io, roomId) =>{
+clearBidSignal = (io, roomId) =>{
 
-  await clearTimeout(io.nsps['/'].adapter.rooms[roomId].bidIndication)
-  await clearTimeout(io.nsps['/'].adapter.rooms[roomId].bidDone)
+  clearTimeout(io.nsps['/'].adapter.rooms[roomId].bidIndication)
+  clearTimeout(io.nsps['/'].adapter.rooms[roomId].bidDone)
 
 }
 
@@ -223,6 +232,11 @@ startNewBid = (io , roomId) =>{
 
   beforeBidSignal(io,roomId);
 
+  redisClient.hgetall(`${roomId}_players`,(err,object)=>{
+      if(object)
+        io.to(roomId).emit('playerList',object);
+  })
+
 }
 
 /**
@@ -232,16 +246,22 @@ startNewBid = (io , roomId) =>{
 
 */
 
-startMatch = async(io,roomId, socket)=>{
+startMatch = (io,roomId, socket)=>{
 
     setPlayerList(io, roomId);
     getPlayer(io, roomId);
 
-    await setTimeout(()=>{
+    setTimeout(()=>{
         io.to(roomId).emit('newPlayer',io.nsps['/'].adapter.rooms[roomId].currentPlayer)
     },500)
 
     beforeBidSignal(io,roomId);
+
+    let list = [...io.nsps['/'].adapter.rooms[roomId].playerList]
+    setTimeout(()=>{
+        io.to(roomId).emit('availablePlayers',shuffle(list))
+    },500)
+
 
 }
 
@@ -263,12 +283,14 @@ newBid = (io,roomId, bid, email )=>{
                 (UserToPlayer[email][roomId] > 11 && (Details.wallet - bid)>=0)
               ){
 
-                if(bid > io.nsps['/'].adapter.rooms[roomId].currentPlayer.currentBid && email !== io.nsps['/'].adapter.rooms[roomId].currentPlayer.highestBidder){
+                if(bid > io.nsps['/'].adapter.rooms[roomId].currentPlayer.currentBid &&
+                        email !== io.nsps['/'].adapter.rooms[roomId].currentPlayer.highestBidder){
+
                     io.nsps['/'].adapter.rooms[roomId].currentPlayer.currentBid = parseInt(bid);
                     io.nsps['/'].adapter.rooms[roomId].currentPlayer.status = 1;
                     io.nsps['/'].adapter.rooms[roomId].currentPlayer.highestBidder = email;
-                    console.log(io.nsps['/'].adapter.rooms[roomId].currentPlayer.currentBid)
                     io.to(roomId).emit('newBid', io.nsps['/'].adapter.rooms[roomId].currentPlayer);
+
                 }
             }
     }
@@ -282,6 +304,5 @@ module.exports = {
   createRoom,
   closeCurrentPlayer,
   startClockSignal,
-  startMatch,
   newBid
 };
