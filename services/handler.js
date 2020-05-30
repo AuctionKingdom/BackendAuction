@@ -259,14 +259,14 @@ startMatch = (io,roomId, socket)=>{
 
     setTimeout(()=>{
         io.to(roomId).emit('newPlayer',io.nsps['/'].adapter.rooms[roomId].currentPlayer)
-    },1000)
+    },1500)
 
     beforeBidSignal(io,roomId);
 
     let list = [...io.nsps['/'].adapter.rooms[roomId].playerList]
     setTimeout(()=>{
         io.to(roomId).emit('availablePlayers',shuffle(list))
-    },1000)
+    },1500)
 
 
 }
