@@ -60,7 +60,7 @@ joinRoom = (io, socket, roomid, addUser, user) =>{
                  console.log('Adding User...')
                  addUser(io,roomid,socket,"present")
 
-               }else if(privateRoomCount.get(roomid) < 2){
+               }else if(privateRoomCount.get(roomid) < 4){
 
                    initialUserSet(roomid, user.email)
                    redisClient.hmset(roomid,user.email,JSON.stringify({name:user.name, wallet:13000}));
@@ -92,7 +92,7 @@ availablePublicRoom = (io, socket, addUser, user)=>{
              console.log(`Player already in the Room , So just Redirect`)
              addUser(io,key,socket,"present")
 
-        }else if(roomCount.get(key) < 2){
+        }else if(roomCount.get(key) < 4){
 
             initialUserSet(key, user.email)
             redisClient.hmset(key,user.email,JSON.stringify({name:user.name, wallet:13000}));

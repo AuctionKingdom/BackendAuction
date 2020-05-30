@@ -1,6 +1,6 @@
 const redisClient = require('../redisConnection.js');
 const { roomCount, privateRoomCount, UserToPlayer, emitPeople} = require('./roomManager.js');
-let num_of_users = 2;
+let num_of_users = 4;
 var playerList = require('../data/players.json')
 
 
