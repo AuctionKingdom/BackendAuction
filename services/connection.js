@@ -75,6 +75,7 @@ connection = (io)=>{
 
 						 	let jwtToken = JSON.parse(data.token);
 							let roomId = data.roomId;
+							console.log(roomId)
 							const decode = jwt.verify(jwtToken.token, process.env.jwt_secret)
 							if(decode._id === jwtToken.user._id)
 							{

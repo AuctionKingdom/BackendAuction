@@ -1,6 +1,6 @@
 const redisClient = require('../redisConnection.js');
 const { roomCount, privateRoomCount, UserToPlayer, emitPeople} = require('./roomManager.js');
-let num_of_users = 4;
+let num_of_users = 2;
 var playerList = require('../data/players.json')
 
 
@@ -11,7 +11,7 @@ var playerList = require('../data/players.json')
     else
         room is full and cannot be added
 */
-PublicAddUser = (io, roomId, socket, condition)=>{
+PublicAddUser = async(io, roomId, socket, condition)=>{
 
   // The User is new to the Room . Add Him and increment the count
   let count = roomCount.get(roomId);
@@ -24,24 +24,20 @@ PublicAddUser = (io, roomId, socket, condition)=>{
 
             //After adding the user if everyone is in the room , Start the match
             if(count+1 === num_of_users)
-              startMatch(io, roomId, socket);
-
-            return true;
+              await startMatch(io, roomId, socket);
         }
   }else if(condition === "present"){
 
       socket.join(roomId);
       socket.emit('success',`${roomId}`);
-      return true;
   }
 
   socket.emit('failure','The Room is Full');
-  return false;
 }
 
 
 
-PrivateAddUser = (io, roomId, socket, condition )=>{
+PrivateAddUser = async(io, roomId, socket, condition )=>{
 
 
     let count = privateRoomCount.get(roomId);
@@ -94,7 +90,7 @@ startClockSignal = (io, roomId) =>{
     Change player index -> index+1
 
 */
-closeCurrentPlayer = (io, roomId) =>{
+closeCurrentPlayer = async(io, roomId) =>{
 
   try{
 
@@ -102,13 +98,13 @@ closeCurrentPlayer = (io, roomId) =>{
         let playerName = io.nsps['/'].adapter.rooms[roomId].currentPlayer.player;
         let playerDetails = JSON.stringify(io.nsps['/'].adapter.rooms[roomId].currentPlayer)
 
-        redisClient.hmset(`${roomId}_players`, playerName, playerDetails);
+        await redisClient.hmset(`${roomId}_players`, playerName, playerDetails);
 
         let currentBid = io.nsps['/'].adapter.rooms[roomId].currentPlayer.currentBid;
         // Only if someone has offered a bid for the player execute this code.. Inorder to prevent null values
 
         if(io.nsps['/'].adapter.rooms[roomId].currentPlayer.status === 1){
-              redisClient.hget(roomId, highestBidder, (err,object)=>{
+              await redisClient.hget(roomId, highestBidder, (err,object)=>{
 
                   if(object){
                       userDetails = JSON.parse(object)
@@ -118,7 +114,7 @@ closeCurrentPlayer = (io, roomId) =>{
                   }
               })
 
-              redisClient.hgetall(roomId,(err,object) =>{
+              await redisClient.hgetall(roomId,(err,object) =>{
                   if(object)
                     io.to(roomId).emit('people',object);
               })
@@ -132,7 +128,7 @@ closeCurrentPlayer = (io, roomId) =>{
         }
 
         io.nsps['/'].adapter.rooms[roomId].curr_index +=1;
-        startNewBid(io, roomId)
+        await startNewBid(io, roomId)
 
   }
   catch(error){
@@ -175,7 +171,7 @@ shuffle = (array) => {
   Initial bid Indication even before anyone makes a bid attempt
 */
 
-setPlayerList = (io,roomId) =>{
+setPlayerList = async(io,roomId) =>{
 
   io.nsps['/'].adapter.rooms[roomId].playerList = shuffle(JSON.parse(JSON.stringify(playerList)));
   io.nsps['/'].adapter.rooms[roomId].curr_index = 0;
@@ -193,7 +189,7 @@ setPlayerList = (io,roomId) =>{
 
 */
 
-getPlayer = (io, roomId) =>{
+getPlayer = async(io, roomId) =>{
 
   var Player = io.nsps['/'].adapter.rooms[roomId].playerList[io.nsps['/'].adapter.rooms[roomId].curr_index]
   Player.currentBid = 0
@@ -207,7 +203,7 @@ getPlayer = (io, roomId) =>{
     For a new Player introduced to the bidding system, one time timeout feature is done
 */
 
-beforeBidSignal = (io, roomId) =>{
+beforeBidSignal = async(io, roomId) =>{
 
   io.nsps['/'].adapter.rooms[roomId].bidIndication = setTimeout(()=>{
                                                           startClockSignal(io, roomId);
@@ -232,14 +228,14 @@ clearBidSignal = async(io, roomId) =>{
 
 */
 
-startNewBid = (io , roomId) =>{
+startNewBid = async(io , roomId) =>{
 
-  getPlayer(io,roomId);
+  await getPlayer(io,roomId);
   io.to(roomId).emit('newPlayer',io.nsps['/'].adapter.rooms[roomId].currentPlayer);
 
-  beforeBidSignal(io,roomId);
+  await beforeBidSignal(io,roomId);
 
-  redisClient.hgetall(`${roomId}_players`,(err,object)=>{
+  await redisClient.hgetall(`${roomId}_players`,(err,object)=>{
       if(object)
         io.to(roomId).emit('playerList',object);
   })
@@ -254,16 +250,16 @@ startNewBid = (io , roomId) =>{
 
 */
 
-startMatch = (io,roomId, socket)=>{
+startMatch = async(io,roomId, socket)=>{
 
-    setPlayerList(io, roomId);
-    getPlayer(io, roomId);
+    await setPlayerList(io, roomId);
+    await getPlayer(io, roomId);
 
     setTimeout(()=>{
         io.to(roomId).emit('newPlayer',io.nsps['/'].adapter.rooms[roomId].currentPlayer)
     },500)
 
-    beforeBidSignal(io,roomId);
+    await beforeBidSignal(io,roomId);
 
     let list = [...io.nsps['/'].adapter.rooms[roomId].playerList]
     setTimeout(()=>{
@@ -275,11 +271,11 @@ startMatch = (io,roomId, socket)=>{
 
 // Clears the initial Timer and proceeds to set or reject the bid made by the user
 
-newBid = (io,roomId, bid, email )=>{
+newBid = async(io,roomId, bid, email )=>{
 
-    clearBidSignal(io, roomId)
+    await clearBidSignal(io, roomId)
 
-    redisClient.hget(roomId, email, (err,object)=>{
+    await redisClient.hget(roomId, email, (err,object)=>{
         if(object){
             let Details = JSON.parse(object)
             /**
