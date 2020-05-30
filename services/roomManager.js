@@ -21,7 +21,7 @@ emitPeople = (io,roomid) =>{
      setTimeout(()=>{
         console.log(object);
         io.to(roomid).emit('people',object)
-     },1000)
+     },3000)
    })
 
 }

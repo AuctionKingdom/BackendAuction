@@ -56,7 +56,9 @@ PrivateAddUser = (io, roomId, socket, condition )=>{
 
               //If everyone is there in the room start the match
               if(count+1 === num_of_users){
-                   startMatch(io, roomId, socket);
+                   setTimeout(()=>{
+                     startMatch(io, roomId, socket);
+                  },5000)
               }
 
 
@@ -259,14 +261,14 @@ startMatch = (io,roomId, socket)=>{
 
     setTimeout(()=>{
         io.to(roomId).emit('newPlayer',io.nsps['/'].adapter.rooms[roomId].currentPlayer)
-    },1500)
+    },500)
 
     beforeBidSignal(io,roomId);
 
     let list = [...io.nsps['/'].adapter.rooms[roomId].playerList]
     setTimeout(()=>{
         io.to(roomId).emit('availablePlayers',shuffle(list))
-    },1500)
+    },500)
 
 
 }
