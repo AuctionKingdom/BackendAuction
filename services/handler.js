@@ -1,5 +1,5 @@
 const redisClient = require('../redisConnection.js');
-const { roomCount, privateRoomCount, UserToPlayer} = require('./roomManager.js');
+const { roomCount, privateRoomCount, UserToPlayer, emitPeople} = require('./roomManager.js');
 let num_of_users = 2;
 var playerList = require('../data/players.json')
 
@@ -115,7 +115,12 @@ closeCurrentPlayer = (io, roomId) =>{
                       redisClient.hmset(roomId, highestBidder, JSON.stringify(userDetails))
                   }
               })
-              console.log(highestBidder)
+
+              redisClient.hgetall(roomId,(err,object) =>{
+                  if(object)
+                    io.to(roomId).emit('people',object);
+              })
+
               UserToPlayer[highestBidder][roomId] +=1
         }else{
 
@@ -212,10 +217,10 @@ beforeBidSignal = (io, roomId) =>{
 
 // Clears the one-time timer initialized at the beginning of the Player Bidding
 
-clearBidSignal = (io, roomId) =>{
+clearBidSignal = async(io, roomId) =>{
 
-  clearTimeout(io.nsps['/'].adapter.rooms[roomId].bidIndication)
-  clearTimeout(io.nsps['/'].adapter.rooms[roomId].bidDone)
+  await clearTimeout(io.nsps['/'].adapter.rooms[roomId].bidIndication)
+  await clearTimeout(io.nsps['/'].adapter.rooms[roomId].bidDone)
 
 }
 
@@ -237,6 +242,7 @@ startNewBid = (io , roomId) =>{
         io.to(roomId).emit('playerList',object);
   })
 
+
 }
 
 /**
@@ -253,14 +259,14 @@ startMatch = (io,roomId, socket)=>{
 
     setTimeout(()=>{
         io.to(roomId).emit('newPlayer',io.nsps['/'].adapter.rooms[roomId].currentPlayer)
-    },500)
+    },1000)
 
     beforeBidSignal(io,roomId);
 
     let list = [...io.nsps['/'].adapter.rooms[roomId].playerList]
     setTimeout(()=>{
         io.to(roomId).emit('availablePlayers',shuffle(list))
-    },500)
+    },1000)
 
 
 }

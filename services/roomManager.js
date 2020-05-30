@@ -17,12 +17,11 @@ initialUserSet = (roomId, email) =>{
 
 emitPeople = (io,roomid) =>{
 
-  console.log('Called')
   redisClient.hgetall(roomid,(err,object)=>{
      setTimeout(()=>{
         console.log(object);
         io.to(roomid).emit('people',object)
-     },500)
+     },1000)
    })
 
 }
@@ -117,4 +116,5 @@ module.exports = {
   availablePublicRoom,
   roomCount,
   UserToPlayer,
+  emitPeople,
 }
