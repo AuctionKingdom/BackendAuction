@@ -202,8 +202,9 @@ getPlayer = async(io, roomId) =>{
     For a new Player introduced to the bidding system, one time timeout feature is done
 */
 
-beforeBidSignal = async(io, roomId) =>{
+beforeBidSignal = (io, roomId) =>{
 
+  console.log(io.nsps['/'].adapter.rooms[roomId].bidIndication)
   io.nsps['/'].adapter.rooms[roomId].bidIndication = setTimeout(()=>{
                                                           startClockSignal(io, roomId);
                                                     },20000)
@@ -214,10 +215,10 @@ beforeBidSignal = async(io, roomId) =>{
 
 // Clears the one-time timer initialized at the beginning of the Player Bidding
 
-clearBidSignal = async(io, roomId) =>{
+clearBidSignal = (io, roomId) =>{
 
-  await clearTimeout(io.nsps['/'].adapter.rooms[roomId].bidIndication)
-  await clearTimeout(io.nsps['/'].adapter.rooms[roomId].bidDone)
+  clearTimeout(io.nsps['/'].adapter.rooms[roomId].bidIndication)
+  clearTimeout(io.nsps['/'].adapter.rooms[roomId].bidDone)
 
 }
 
@@ -227,14 +228,14 @@ clearBidSignal = async(io, roomId) =>{
 
 */
 
-startNewBid = async(io , roomId) =>{
+startNewBid = (io , roomId) =>{
 
-  await getPlayer(io,roomId);
+  getPlayer(io,roomId);
   io.to(roomId).emit('newPlayer',io.nsps['/'].adapter.rooms[roomId].currentPlayer);
 
-  await beforeBidSignal(io,roomId);
+  beforeBidSignal(io,roomId);
 
-  await redisClient.hgetall(`${roomId}_players`,(err,object)=>{
+  redisClient.hgetall(`${roomId}_players`,(err,object)=>{
       if(object)
         io.to(roomId).emit('playerList',object);
   })
@@ -249,16 +250,16 @@ startNewBid = async(io , roomId) =>{
 
 */
 
-startMatch = async(io,roomId, socket)=>{
+startMatch = (io,roomId, socket)=>{
 
-    await setPlayerList(io, roomId);
-    await getPlayer(io, roomId);
+    setPlayerList(io, roomId);
+    getPlayer(io, roomId);
 
     setTimeout(()=>{
         io.to(roomId).emit('newPlayer',io.nsps['/'].adapter.rooms[roomId].currentPlayer)
     },500)
 
-    await beforeBidSignal(io,roomId);
+    beforeBidSignal(io,roomId);
 
     let list = [...io.nsps['/'].adapter.rooms[roomId].playerList]
     setTimeout(()=>{
