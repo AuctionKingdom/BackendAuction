@@ -98,7 +98,7 @@ closeCurrentPlayer = (io, roomId) =>{
         let playerName = io.nsps['/'].adapter.rooms[roomId].currentPlayer.player;
         let playerDetails = JSON.stringify(io.nsps['/'].adapter.rooms[roomId].currentPlayer)
 
-        await redisClient.hmset(`${roomId}_players`, playerName, playerDetails);
+        redisClient.hmset(`${roomId}_players`, playerName, playerDetails);
 
         let currentBid = io.nsps['/'].adapter.rooms[roomId].currentPlayer.currentBid;
         // Only if someone has offered a bid for the player execute this code.. Inorder to prevent null values
@@ -127,7 +127,7 @@ closeCurrentPlayer = (io, roomId) =>{
         }
 
         io.nsps['/'].adapter.rooms[roomId].curr_index +=1;
-        await startNewBid(io, roomId)
+        startNewBid(io, roomId)
 
   }
   catch(error){
@@ -272,7 +272,7 @@ startMatch = async(io,roomId, socket)=>{
 
 newBid = (io,roomId, bid, email )=>{
 
-    
+
     redisClient.hget(roomId, email, (err,object)=>{
         if(object){
             let Details = JSON.parse(object)
