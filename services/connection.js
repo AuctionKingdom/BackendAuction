@@ -24,8 +24,8 @@ connection = (io)=>{
 						const decode = jwt.verify(jwtToken.token,process.env.jwt_secret)
 						if(decode._id === jwtToken.user._id)
 						{
-								let user = {'email':jwtToken.user.email,'name':jwtToken.user.name}
-						    createRoom(io,socket,PrivateAddUser,user,"private");
+								let user = {'email':jwtToken.user.email,'name':jwtToken.user.name};
+						    createRoom(io,socket,PrivateAddUser,user,"private", data.roomSize);
 
 					  }else{
 								socket.emit('failure','Invalid JWT Token')

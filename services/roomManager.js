@@ -5,6 +5,7 @@ var playerList = require('../data/players.json')
 var roomCount = new Map();
 var privateRoomCount = new Map();
 var UserToPlayer = new Map();
+var roomSizeMap = new Map();
 
 
 initialUserSet = async(roomId, email) =>{
@@ -21,13 +22,13 @@ emitPeople = async(io,roomid) =>{
      setTimeout(()=>{
         console.log(object);
         io.to(roomid).emit('people',object)
-     },3000)
+     },5000)
    })
 
 }
 
 
-createRoom = async(io, socket, addUser, user, type) =>{
+createRoom = async(io, socket, addUser, user, type, roomSize) =>{
 
     //Created a random RoomName and attached the client name
     const id = crypto.randomBytes(3).toString("hex");
@@ -35,14 +36,18 @@ createRoom = async(io, socket, addUser, user, type) =>{
 
     if(type === "public"){
 
+        roomSizeMap.set(id,roomSize);
         roomCount.set(id,0);
         initialUserSet(id, user.email);
 
     }else{
+
+        roomSizeMap.set(id,roomSize);
         privateRoomCount.set(id,0);
         initialUserSet(id,user.email);
     }
-    await addUser(io,id,socket,"new");
+
+    await addUser(io,id,socket,"new",roomSizeMap.get(id));
     await emitPeople(io,id);
 
 }
@@ -57,14 +62,14 @@ joinRoom = async(io, socket, roomid, addUser, user) =>{
             await redisClient.hget(roomid,user.email,function(err,object){
 
                if(object){
-                 console.log('Adding User...')
-                 addUser(io,roomid,socket,"present")
 
-               }else if(privateRoomCount.get(roomid) < 2){
+                 addUser(io,roomid,socket,"present",roomSizeMap.get(roomid));
 
-                   initialUserSet(roomid, user.email)
+               }else if(privateRoomCount.get(roomid) < roomSizeMap.get(roomid)){
+
+                   initialUserSet(roomid, user.email);
                    redisClient.hmset(roomid,user.email,JSON.stringify({name:user.name, wallet:13000}));
-                   addUser(io,roomid,socket,"new")
+                   addUser(io,roomid,socket,"new",roomSizeMap.get(roomid));
 
                }
                emitPeople(io,roomid);
@@ -89,14 +94,13 @@ availablePublicRoom = async(io, socket, addUser, user)=>{
     await redisClient.hget(key,user.email,function(err,object){
         if(object){
 
-             console.log(`Player already in the Room , So just Redirect`)
-             addUser(io,key,socket,"present")
+             addUser(io,key,socket,"present",roomSizeMap.get(key))
 
-        }else if(roomCount.get(key) < 2){
+        }else if(roomCount.get(key) < roomSizeMap.get(key)){
 
-            initialUserSet(key, user.email)
+            initialUserSet(key, user.email);
             redisClient.hmset(key,user.email,JSON.stringify({name:user.name, wallet:13000}));
-            addUser(io,key,socket,"new"),key
+            addUser(io,key,socket,"new", roomSizeMap.get(key))
 
         }
         if(err){
@@ -105,7 +109,7 @@ availablePublicRoom = async(io, socket, addUser, user)=>{
         emitPeople(io,roomid);
       })
   }
-  await createRoom(io, socket, addUser, user, "public")
+  await createRoom(io, socket, addUser, user, "public", 8)
 
 }
 

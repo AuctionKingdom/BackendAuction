@@ -1,6 +1,5 @@
 const redisClient = require('../redisConnection.js');
 const { roomCount, privateRoomCount, UserToPlayer, emitPeople} = require('./roomManager.js');
-let num_of_users = 2;
 var playerList = require('../data/players.json')
 
 
@@ -11,11 +10,11 @@ var playerList = require('../data/players.json')
     else
         room is full and cannot be added
 */
-PublicAddUser = (io, roomId, socket, condition)=>{
+PublicAddUser = (io, roomId, socket, condition, num_of_users)=>{
 
   // The User is new to the Room . Add Him and increment the count
   let count = roomCount.get(roomId);
-  if(condition === "new"){
+  if(condition.localeCompare("new")===0){
         if(count < num_of_users){
             socket.join(roomId);
             //Set new RoomCount
@@ -24,9 +23,12 @@ PublicAddUser = (io, roomId, socket, condition)=>{
 
             //After adding the user if everyone is in the room , Start the match
             if(count+1 === num_of_users)
-               startMatch(io, roomId, socket);
+              setTimeout(()=>{
+                  startMatch(io, roomId, socket);
+              },5000);
+
         }
-  }else if(condition === "present"){
+  }else if(condition.localeCompare("present") === 0){
 
       socket.join(roomId);
       socket.emit('success',`${roomId}`);
@@ -37,7 +39,7 @@ PublicAddUser = (io, roomId, socket, condition)=>{
 
 
 
-PrivateAddUser = (io, roomId, socket, condition )=>{
+PrivateAddUser = (io, roomId, socket, condition, num_of_users)=>{
 
 
     let count = privateRoomCount.get(roomId);
@@ -51,7 +53,7 @@ PrivateAddUser = (io, roomId, socket, condition )=>{
               socket.emit('success',`${roomId}`);
 
               //If everyone is there in the room start the match
-              if(count+1 === num_of_users){
+              if(count+1 == num_of_users){
                    setTimeout(()=>{
                      startMatch(io, roomId, socket);
                   },5000)
@@ -204,7 +206,6 @@ getPlayer = async(io, roomId) =>{
 
 beforeBidSignal = (io, roomId) =>{
 
-  console.log(io.nsps['/'].adapter.rooms[roomId].bidIndication)
   io.nsps['/'].adapter.rooms[roomId].bidIndication = setTimeout(()=>{
                                                           startClockSignal(io, roomId);
                                                     },20000)
