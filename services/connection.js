@@ -5,8 +5,6 @@ const jwt = require('jsonwebtoken')
 
 connection = (io)=>{
 
-		var BidIndication, BidDone;
-
 		io.on('connection',(socket)=>{
 
 					socket.emit('Connected',"True");
@@ -96,20 +94,16 @@ connection = (io)=>{
 					*/
 					socket.on('Bid', data =>{
 
-							console.log(data)
-							clearTimeout(BidDone)
-							clearTimeout(BidIndication)
-
 							newBid(io, data.roomId, data.bid, data.email);
-							BidIndication = setTimeout(() =>{
-									startClockSignal(io, data.roomId);
-							},10000)
 
-							BidDone = setTimeout(()=>{
-									closeCurrentPlayer(io, data.roomId);
-							},20000)
+					})
 
-
+					socket.on('leave',data=>{
+							try{
+								socket.leave(data.roomId)
+							}catch(error){
+								console.log('No Room exists now')
+							}
 					})
 
 
