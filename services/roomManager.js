@@ -22,7 +22,7 @@ emitPeople = async(io,roomid) =>{
      setTimeout(()=>{
         console.log(object);
         io.to(roomid).emit('people',object)
-     },5000)
+     },1000)
    })
 
 }
@@ -48,7 +48,6 @@ createRoom = async(io, socket, addUser, user, type, roomSize) =>{
     }
 
     await addUser(io,id,socket,"new",roomSizeMap.get(id));
-    await emitPeople(io,id);
 
 }
 
@@ -70,9 +69,8 @@ joinRoom = async(io, socket, roomid, addUser, user) =>{
                    initialUserSet(roomid, user.email);
                    redisClient.hmset(roomid,user.email,JSON.stringify({name:user.name, wallet:13000}));
                    addUser(io,roomid,socket,"new",roomSizeMap.get(roomid));
-
                }
-               emitPeople(io,roomid);
+
             })
     }
 
@@ -106,7 +104,6 @@ availablePublicRoom = async(io, socket, addUser, user)=>{
         if(err){
           console.log(`Public Room Error: ${err}`)
         }
-        emitPeople(io,roomid);
       })
   }
   await createRoom(io, socket, addUser, user, "public", 8)
@@ -121,4 +118,5 @@ module.exports = {
   roomCount,
   UserToPlayer,
   emitPeople,
+  roomSizeMap,
 }

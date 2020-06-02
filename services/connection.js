@@ -1,5 +1,5 @@
-const { createRoom, joinRoom, availablePublicRoom }  = require('./roomManager.js');
-const { PublicAddUser, PrivateAddUser, startClockSignal, closeCurrentPlayer, newBid} = require('./handler.js');
+const { createRoom, joinRoom, availablePublicRoom, emitPeople}  = require('./roomManager.js');
+const { PublicAddUser, PrivateAddUser, newBid, checkLoaded} = require('./handler.js');
 const redisClient = require('../redisConnection.js');
 const jwt = require('jsonwebtoken')
 
@@ -11,6 +11,12 @@ connection = (io)=>{
 			    console.log("Got connection..",socket.id);
 
 
+					/**Once the User Page loads up emit player*/
+
+					socket.on('send',(roomId)=>{
+							emitPeople(io, roomId);
+							checkLoaded(io, roomId, socket);
+					})
 
 					/**
 						Create room doesnt expect the user to provide
