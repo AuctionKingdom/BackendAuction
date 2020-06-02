@@ -67,12 +67,15 @@ PrivateAddUser = (io, roomId, socket, condition, num_of_users)=>{
 checkLoaded = (io, roomId, socket) =>{
 
   let count = privateRoomCount.get(roomId);
-  console.log('Called');
   //If everyone is there in the room start the match
-  if(count == roomSizeMap.get(roomId)){
-       setTimeout(()=>{
-         startMatch(io, roomId, socket);
-      },1000)
+  if(count == roomSizeMap.get(roomId) && io.nsps['/'].adapter.rooms[roomId] !== undefined){
+      if(io.nsps['/'].adapter.rooms[roomId].started === true){
+            sendSignal(io,roomId,socket)
+      }else{
+          setTimeout(()=>{
+            startMatch(io, roomId, socket);
+         },1000)
+      }
   }
 }
 
@@ -100,24 +103,23 @@ closeCurrentPlayer = (io, roomId) =>{
         let playerName = io.nsps['/'].adapter.rooms[roomId].currentPlayer.player;
         let playerDetails = JSON.stringify(io.nsps['/'].adapter.rooms[roomId].currentPlayer)
 
+
         redisClient.hmset(`${roomId}_players`, playerName, playerDetails);
 
         let currentBid = io.nsps['/'].adapter.rooms[roomId].currentPlayer.currentBid;
         // Only if someone has offered a bid for the player execute this code.. Inorder to prevent null values
 
+
         if(io.nsps['/'].adapter.rooms[roomId].currentPlayer.status === 1){
-               redisClient.hget(roomId, highestBidder, (err,object)=>{
+              io.to(roomId).emit('sold',{player:playerName,bidder:highestBidder,bid:currentBid});
+
+              redisClient.hget(roomId, highestBidder, (err,object)=>{
                   if(object){
                       userDetails = JSON.parse(object)
                       userDetails['wallet'] = userDetails['wallet']-currentBid;
 
                       redisClient.hmset(roomId, highestBidder, JSON.stringify(userDetails))
                   }
-              })
-
-               redisClient.hgetall(roomId,(err,object) =>{
-                  if(object)
-                    io.to(roomId).emit('people',object);
               })
 
               UserToPlayer[highestBidder][roomId] +=1
@@ -268,9 +270,29 @@ startNewBid = (io , roomId) =>{
 
 */
 
+
+sendSignal = (io, roomId, socket) =>{
+
+  try{
+
+      setTimeout(()=>{
+          socket.emit('newPlayer',io.nsps['/'].adapter.rooms[roomId].currentPlayer);
+      },500)
+
+      let list = [...io.nsps['/'].adapter.rooms[roomId].playerList]
+      setTimeout(()=>{
+          socket.emit('availablePlayers',shuffle(list))
+      },500)
+  }catch(error){
+      console.log(error);
+  }
+
+}
+
 startMatch = (io,roomId, socket)=>{
 
     try{
+        io.nsps['/'].adapter.rooms[roomId].started = true;
         setPlayerList(io, roomId);
         getPlayer(io, roomId);
 
@@ -284,7 +306,7 @@ startMatch = (io,roomId, socket)=>{
         setTimeout(()=>{
             io.to(roomId).emit('availablePlayers',shuffle(list))
         },500)
-        
+
     }catch(error){
         console.log(error);
     }
